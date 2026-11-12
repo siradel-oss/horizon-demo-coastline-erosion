@@ -1,0 +1,412 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Design tokens (Siradel 2026 charter), light and dark.
+ * Absolute rule: always use a semantic token (bg-surface-*, text-text-*,
+ * border-border-*), never a primitive nor a hard-coded hex.
+ * ------------------------------------------------------------------------- */
+
+/* Dark mode via .dark class on an ancestor (e.g. <html class="dark">) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Lato font (OFL) — vendored locally in resources/. Referenced relative so Vite
+   bundles + fingerprints them and rewrites the URL with the deploy base (`base`),
+   keeping them resolvable under a subpath. See Lato-OFL.txt. */
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../resources/Lato-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../resources/Lato-Bold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("../resources/Lato-Black.woff2") format("woff2");
+}
+
+/* Icons: inline SVG, "tabler"-style (components/icon.ts + icons.ts). */
+
+@theme {
+    /* App wordmark — light mode values (WCAG AA on white);
+       dark values overridden under .dark below. */
+    --color-brand-muted: #4a5e7a;
+    --color-brand-accent: #16a34a;
+    --color-brand-strong: #1a1a2e;
+
+    /* Surface panel tokens — light: white card; dark override below. */
+    --ui-surface-bg: var(--color-surface-interface);
+    --ui-surface-shadow: 0 2px 8px rgb(0 0 0 / 0.1), 0 0 1px rgb(0 0 0 / 0.06);
+
+    /* Typography */
+    --font-sans: "Lato", sans-serif;
+
+    --text-h1: 48px;
+    --text-h1--line-height: 48px;
+    --text-h2: 32px;
+    --text-h2--line-height: 32px;
+    --text-h3: 28px;
+    --text-h3--line-height: 28px;
+    --text-h4: 24px;
+    --text-h4--line-height: 24px;
+    --text-h5: 22px;
+    --text-h5--line-height: 22px;
+    --text-h6: 18px;
+    --text-h6--line-height: 22px;
+
+    --text-body-lg: 18px;
+    --text-body-lg--line-height: 20px;
+    --text-body-md: 16px;
+    --text-body-md--line-height: 20px;
+    --text-body-sm: 14px;
+    --text-body-sm--line-height: 18px;
+    --text-body-xs: 13px;
+    --text-body-xs--line-height: 18px;
+    --text-body-2xs: 12px;
+    --text-body-2xs--line-height: 16px;
+    --text-body-3xs: 8px;
+    --text-body-3xs--line-height: 13px;
+
+    /* Spacing */
+    --spacing-none: 0px;
+    --spacing-xxs: 2px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --spacing-4xl: 40px;
+    --spacing-5xl: 48px;
+    --spacing-6xl: 56px;
+    --spacing-7xl: 64px;
+    --spacing-8xl: 72px;
+    --spacing-9xl: 80px;
+    --spacing-10xl: 88px;
+    --spacing-11xl: 96px;
+    --spacing-12xl: 104px;
+    --spacing-13xl: 110px;
+    --spacing-14xl: 118px;
+    --spacing-15xl: 126px;
+    --spacing-16xl: 134px;
+
+    /* Border radius */
+    --radius-none: 0px;
+    --radius-xxs: 2px;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-l: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-3xl: 48px;
+    --radius-4xl: 64px;
+
+    /* Elevation / shadows — light: soft grey; dark override below. */
+    --shadow-inner-field: inset 0 0.5px 4px #dfdfe1;
+    --shadow-1: 0 0.5px 2px #dfdfe1, 0 0 1px #dfdfe1;
+    --shadow-2: 0 2px 4px #dfdfe1, 0 0 1px #dfdfe1;
+    --shadow-3: 0 4px 8px #dfdfe1, 0 0 2px #dfdfe1;
+    --shadow-4: 0 8px 16px #dfdfe1, 0 2px 4px #dfdfe1;
+    --shadow-5: 0 16px 24px #dfdfe1, 0 2px 8px #dfdfe1;
+    --shadow-6: 0 20px 32px #dfdfe1, 0 2px 8px #dfdfe1;
+
+    /* Z-index layers */
+    --z-base: 0;
+    --z-sticky: 100;
+    --z-dropdown: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-toast: 500;
+    --z-tooltip: 600;
+
+    /* Motion */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 350ms;
+
+    /* Semantic colors — text */
+    --color-text-headings: #0c0c0c;
+    --color-text-body: #353536;
+    --color-text-primary: #38419d;
+    --color-text-primary-hover: #7076b4;
+    --color-text-primary-pressed: #545ba8;
+    --color-text-secondary: #f2365f;
+    --color-text-secondary-hover: #ec8198;
+    --color-text-alternative: #0281ac;
+    --color-text-information: #192452;
+    --color-text-success: #30b05b;
+    --color-text-warning: #ff5c00;
+    --color-text-danger: #e01b00;
+    --color-text-disabled: #7a7a7a;
+    /* Muted caption/notice grey. Darkened from #99999d (≈2.85:1 on white, fails
+       WCAG AA for small text) to ≈5:1 — a11y lock. Dark mode keeps its own value. */
+    --color-text-lightest: #6e6e73;
+    --color-text-white: #ffffff;
+    /* surface */
+    --color-surface-page: #f7f6f9;
+    --color-surface-interface: #ffffff;
+    --color-surface-white: #ffffff;
+    --color-surface-primary: #38419d;
+    --color-surface-primary-hover: #7076b4;
+    --color-surface-primary-light: #e9ebff;
+    --color-surface-primary-lightest: #f4f8ff;
+    --color-surface-secondary: #f2365f;
+    --color-surface-secondary-hover: #ef6986;
+    --color-surface-secondary-light: #eb9aac;
+    --color-surface-alternative: #0281ac;
+    --color-surface-success: #30b05b;
+    --color-surface-success-active: #59c07c;
+    --color-surface-error: #870000;
+    --color-surface-error-active: #ad1300;
+    --color-surface-disabled: #dfdfe1;
+    --color-surface-dark: #7a7a7a;
+    --color-surface-darkest: #0c0c0c;
+    /* border */
+    --color-border-default: #dfdfe1;
+    --color-border-body: #353536;
+    --color-border-headings: #202020;
+    --color-border-primary: #38419d;
+    --color-border-primary-hover: #7076b4;
+    --color-border-primary-focus: #e9ebff;
+    --color-border-secondary: #f2365f;
+    --color-border-alternative: #0281ac;
+    --color-border-information: #545ba8;
+    --color-border-success: #30b05b;
+    --color-border-warning: #ff5c00;
+    --color-border-error: #e01b00;
+    --color-border-disabled: #dfdfe1;
+    --color-border-white: #ffffff;
+
+    /* Component tokens — button */
+    --color-button-background-primary: #38419d;
+    --color-button-background-primary-hover: #7076b4;
+    --color-button-background-primary-focus: #e9ebff;
+    --color-button-background-secondary: #f2365f;
+    --color-button-background-secondary-hover: #ef6986;
+    --color-button-background-danger: #e01b00;
+    --color-button-background-danger-hover: #ad1300;
+    --color-button-background-success: #30b05b;
+    --color-button-background-surface: #ffffff;
+    --color-button-background-disabled: #dfdfe1;
+    --color-button-text-primary: #38419d;
+    --color-button-text-secondary: #ef4e71;
+    --color-button-text-danger: #e01b00;
+    --color-button-text-light: #ffffff;
+    --color-button-text-link: #4a4a4c;
+    --color-button-text-disabled: #7a7a7a;
+    --color-button-border-primary: #38419d;
+    --color-button-border-secondary: #f2365f;
+    --color-button-border-danger: #e01b00;
+    --color-button-border-default: #bdbdbf;
+    --color-button-border-hover: #8c91c0;
+    --color-button-border-disabled: #99999d;
+    /* form */
+    --color-form-background-surface: #ffffff;
+    --color-form-background-focus: #efeff0;
+    --color-form-background-active: #38419d;
+    --color-form-background-error: #fff3f0;
+    --color-form-background-success: #d6efde;
+    --color-form-background-disabled: #efeff0;
+    --color-form-text-default: #353536;
+    --color-form-text-primary: #38419d;
+    --color-form-text-placeholder: #636366;
+    --color-form-text-success: #30b05b;
+    --color-form-text-danger: #ad1300;
+    --color-form-border-default: #bdbdbf;
+    --color-form-border-focus: #e9ebff;
+    --color-form-border-active: #192452;
+    --color-form-border-error: #ad1300;
+    --color-form-border-success: #30b05b;
+}
+
+/* DARK override — only the colors that change */
+.dark {
+    --color-brand-muted: #8294ab;
+    --color-brand-accent: #4ade80;
+    --color-brand-strong: #ffffff;
+    --ui-surface-bg: color-mix(in srgb, var(--color-surface-page) 86%, #000);
+    --ui-surface-shadow: 0 12px 32px rgb(0 0 0 / 0.55);
+
+    /* Shadows — dark: translucent black */
+    --shadow-1: 0 0.5px 2px #00000066, 0 0 1px #00000066;
+    --shadow-2: 0 2px 4px #00000066, 0 0 1px #00000066;
+    --shadow-3: 0 4px 8px #00000080, 0 0 2px #00000066;
+    --shadow-4: 0 8px 16px #00000080, 0 2px 4px #00000066;
+    --shadow-5: 0 16px 24px #00000099, 0 2px 8px #00000066;
+    --shadow-6: 0 20px 32px #00000099, 0 2px 8px #00000066;
+
+    --color-text-headings: #ffffff;
+    --color-text-body: #d3d7e5;
+    --color-text-primary: #8c91c0;
+    --color-text-primary-hover: #a8abcc;
+    --color-text-primary-pressed: #8c91c0;
+    --color-text-secondary: #ef6986;
+    --color-text-secondary-hover: #ec8198;
+    --color-text-alternative: #40c6f2;
+    --color-text-information: #7076b4;
+    --color-text-success: #d6efde;
+    --color-text-warning: #ff5c00;
+    --color-text-danger: #ff4333;
+    --color-text-disabled: #b1b7cb;
+    --color-text-lightest: #9097b0;
+    --color-text-white: #ffffff;
+    --color-surface-page: #252833;
+    --color-surface-interface: #3d4252;
+    --color-surface-white: #ffffff;
+    --color-surface-primary: #545ba8;
+    --color-surface-primary-hover: #7076b4;
+    --color-surface-primary-light: #38419d;
+    --color-surface-primary-lightest: #7076b4;
+    --color-surface-secondary: #ef6986;
+    --color-surface-secondary-hover: #ec8198;
+    --color-surface-secondary-light: #ffe1e7;
+    --color-surface-alternative: #40c6f2;
+    --color-surface-success: #30b05b;
+    --color-surface-success-active: #59c07c;
+    --color-surface-error: #2a0100;
+    --color-surface-error-active: #e01b00;
+    --color-surface-disabled: #3d4252;
+    --color-surface-dark: #252833;
+    --color-surface-darkest: #ffffff;
+    --color-border-default: #565d73;
+    --color-border-body: #565d73;
+    --color-border-headings: #d3d7e5;
+    --color-border-primary: #8c91c0;
+    --color-border-primary-hover: #a8abcc;
+    --color-border-primary-focus: #7076b4;
+    --color-border-secondary: #ec8198;
+    --color-border-alternative: #40c6f2;
+    --color-border-information: #7076b4;
+    --color-border-success: #83d09d;
+    --color-border-warning: #ff5c00;
+    --color-border-error: #ff4333;
+    --color-border-disabled: #9097b0;
+    --color-border-white: #727993;
+
+    --color-button-background-primary: #545ba8;
+    --color-button-background-primary-hover: #38419d;
+    --color-button-background-primary-focus: #192452;
+    --color-button-background-secondary: #ef4e71;
+    --color-button-background-secondary-hover: #ef6986;
+    --color-button-background-danger: #870000;
+    --color-button-background-success: #acdfbd;
+    --color-button-background-surface: #3d4252;
+    --color-button-background-disabled: #252833;
+    --color-button-text-primary: #8c91c0;
+    --color-button-text-secondary: #ef6986;
+    --color-button-text-danger: #ff8c79;
+    --color-button-text-link: #d3d7e5;
+    --color-button-text-disabled: #9097b0;
+    --color-button-border-primary: #8c91c0;
+    --color-button-border-secondary: #ef6986;
+    --color-button-border-danger: #ff8c79;
+    --color-button-border-default: #9097b0;
+    --color-button-border-hover: #7076b4;
+    --color-button-border-disabled: #727993;
+    --color-form-background-surface: #3d4252;
+    --color-form-background-focus: #565d73;
+    --color-form-background-active: #545ba8;
+    --color-form-background-error: #570000;
+    --color-form-background-success: #024b1b;
+    --color-form-background-disabled: #565d73;
+    --color-form-text-default: #f6f8ff;
+    --color-form-text-primary: #e9ebff;
+    --color-form-text-placeholder: #d3d7e5;
+    --color-form-text-success: #acdfbd;
+    --color-form-text-danger: #ff8c79;
+    --color-form-border-default: #9097b0;
+    --color-form-border-focus: #a8abcc;
+    --color-form-border-active: #e9ebff;
+    --color-form-border-error: #ff8c79;
+    --color-form-border-success: #acdfbd;
+}
+
+/* Focus utility — focus-visible so mouse clicks don't show the ring */
+.focus-ring {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-primary-focus;
+}
+
+/* Base */
+button:focus,
+input:focus,
+a:focus {
+    @apply outline-none ring-2 ring-border-primary-focus;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+hr {
+    @apply my-4 border-border-default;
+}
+
+/* ---------------------------------------------------------------------------
+ * Surface panels — opaque, no blur. Tokens --ui-surface-bg/shadow switch
+ * via @theme (light = white card) / .dark (dark). Global class: applies across
+ * all components (non-scoped styles).
+ * ------------------------------------------------------------------------- */
+.ui-surface {
+    background-color: var(--ui-surface-bg);
+    border: 1px solid var(--color-border-default);
+    box-shadow: var(--ui-surface-shadow);
+}
+
+/* Base chrome button (applied by the [app-button] / [app-text-button]
+   directives). Primary accent on hover / active / selected. */
+.ui-btn {
+    color: var(--color-text-headings);
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+}
+.ui-btn:hover {
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-primary) 20%,
+        transparent
+    );
+}
+.ui-btn:active {
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-primary) 30%,
+        transparent
+    );
+}
+.ui-btn.active {
+    background-color: color-mix(
+        in srgb,
+        var(--color-surface-primary) 55%,
+        transparent
+    );
+    border-bottom-color: rgb(0 0 0 / 0.2);
+    border-top-color: rgb(255 255 255 / 0.05);
+}
+
+/* Range sliders (opacity, sea level, …) share one accent fill — primary. */
+input[type="range"] {
+    accent-color: var(--color-surface-primary);
+    cursor: pointer;
+}

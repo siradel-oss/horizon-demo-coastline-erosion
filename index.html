@@ -1,0 +1,27 @@
+<!doctype html>
+<html class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Shoreline Explorer</title>
+        <!-- GitHub Pages cannot send COOP/COEP headers: this service worker adds
+             them so SharedArrayBuffer is available. No-op when already isolated. -->
+        <script src="coi-serviceworker.min.js"></script>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta
+            name="description"
+            content="Experimental coastline retreat explorer for metropolitan France — a demonstrator of the Horizon 3D engine."
+        />
+        <!-- Apply stored dark/light preference before paint (no flash). Default = dark. -->
+        <script>
+            try {
+                if (localStorage.getItem("dih-shoreline-explorer:dark") === "false")
+                    document.documentElement.classList.remove("dark");
+            } catch (e) {}
+        </script>
+    </head>
+    <body>
+        <app-root></app-root>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

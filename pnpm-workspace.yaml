@@ -1,0 +1,14 @@
+# Allow the native postinstall scripts of these build tools.
+# pnpm 11+ reads `allowBuilds`, pnpm 10 reads `onlyBuiltDependencies`.
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  protobufjs: true
+onlyBuiltDependencies:
+  - "@parcel/watcher"
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - protobufjs
