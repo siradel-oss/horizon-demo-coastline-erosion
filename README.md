@@ -1,16 +1,56 @@
-# Shoreline Explorer
+# Shoreline Explorer — coastal erosion in France, in 3D
 
-An experimental explorer of **coastline retreat** along the shores of metropolitan
-France, in English and French. It shows how the coastline has moved over time,
-extends the measured erosion trend to 2050 and 2100, and maps low-lying areas and
-the assets at stake.
+An experimental explorer of **coastal erosion and coastline retreat** along the
+shores of metropolitan France, in English and French. See how the coastline has
+moved, where it could be in 2050 and 2100, and what lies in its path, on a 3D map
+in the browser.
 
-> **A demonstrator.** Shoreline Explorer is a demo of
-> [Horizon](https://horizon.oss.siradel.com), Siradel's open source geospatial 3D
-> engine, which grew out of the [SCE](https://sce.oss.siradel.com) ecosystem.
-> The framework draws on the 2024 Cerema study _« Projection du trait de
-> côte et analyse des enjeux au niveau national, horizons 2050 et 2100 »_. It is
-> still an experiment, so the data processing may contain small errors.
+[![Shoreline Explorer: coastal low-lying areas around La Rochelle in 3D, below the highest astronomical tide + 1 m](.github/screenshot.webp)](https://siradel-oss.github.io/horizon-demo-coastline-erosion/)
+
+**[▶ Live demo](https://siradel-oss.github.io/horizon-demo-coastline-erosion/)**
+
+## Features
+
+- Historical and recent coastlines, national coastal erosion indicator (Cerema)
+- Shoreline retreat projections for 2050 and 2100, and event-driven retreat
+  (storms)
+- Coastal low-lying areas below the highest astronomical tide (HAT and HAT + 1 m)
+- Exposed population, buildings, land use and coastal structures
+- Sea level simulation: raise the water height on the 3D terrain
+- Erosion hotspots, guided tour, side-by-side comparison of aerial imagery
+- 3D terrain and IGN imagery, address search, dark / light theme, English /
+  French interface
+
+## Built with Horizon
+
+Shoreline Explorer is a demo of [Horizon](https://github.com/siradel-oss/horizon),
+Siradel's open source real-time 3D engine for map data on a globe (WebAssembly,
+WebGL 2, TypeScript). It shows how an Angular application drives Horizon to style
+large PMTiles vector datasets over streamed terrain and imagery.
+
+- Horizon: [website and documentation](https://horizon.oss.siradel.com) ·
+  [getting started](https://horizon.oss.siradel.com/doc/getting_started.html) ·
+  npm packages `@siradel-oss/horizon-{api,core,protocol}`
+- More Horizon demos:
+  [IGN Explorer](https://github.com/siradel-oss/horizon-demo-ign-geoplateforme)
+  (IGN Géoplateforme catalogue in 3D) ·
+  [Reunion Island Explorer](https://github.com/siradel-oss/horizon-demo-reunion-island)
+  (3D hiking trails of La Réunion)
+
+> **A demonstrator.** Horizon grew out of the [SCE](https://sce.oss.siradel.com)
+> ecosystem. The framework of Shoreline Explorer draws on the 2024 Cerema study
+> _« Projection du trait de côte et analyse des enjeux au niveau national,
+> horizons 2050 et 2100 »_. It is still an experiment, so the data processing may
+> contain small errors.
+
+## En français
+
+Shoreline Explorer est un explorateur expérimental de **l'érosion côtière** et du
+**recul du trait de côte** en France métropolitaine : traits de côte historiques,
+indicateur national d'érosion, projections à 2050 et 2100, zones basses
+littorales et enjeux exposés (population, bâti, occupation du sol), sur une carte
+3D. Inspiré de l'étude Cerema de 2024, démonstrateur du moteur 3D open source
+Horizon, interface en français et en anglais.
 
 ## Run it
 
@@ -29,7 +69,7 @@ pnpm dev        # http://localhost:5173
 | `pnpm preview` | Serves the build locally  |
 
 To deploy under a subpath, set the Vite base at build time
-(`pnpm build --base=/dih-shoreline-explorer/`). All runtime URLs (data, WASM, fonts)
+(`pnpm build --base=/horizon-demo-coastline-erosion/`). All runtime URLs (data, WASM, fonts)
 are resolved relative to it.
 
 ### Serving requirements

@@ -343,7 +343,7 @@ export class WelcomeWindow {
         {
             icon: "github",
             label: { en: "Source code", fr: "Code source" },
-            text: "github.com/siradel-oss/dih-shoreline-explorer",
+            text: "github.com/siradel-oss/horizon-demo-coastline-erosion",
             href: LINKS.repo,
             external: true,
         },

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="dark">
+<html lang="en" class="dark">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,12 +10,49 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta
             name="description"
-            content="Experimental coastline retreat explorer for metropolitan France — a demonstrator of the Horizon 3D engine."
+            content="Coastal erosion in France: historical coastlines, 2050/2100 retreat projections and assets at risk on a 3D map. Built with the Horizon 3D engine."
         />
+        <!-- Link previews (Open Graph): absolute URLs, the build itself uses relative ones. -->
+        <link
+            rel="canonical"
+            href="https://siradel-oss.github.io/horizon-demo-coastline-erosion/"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:site_name"
+            content="Horizon demos · Siradel open source"
+        />
+        <meta
+            property="og:title"
+            content="Shoreline Explorer — coastal erosion in France, in 3D"
+        />
+        <meta
+            property="og:description"
+            content="Coastal erosion in France: historical coastlines, 2050/2100 retreat projections and assets at risk on a 3D map. Built with the Horizon 3D engine."
+        />
+        <meta
+            property="og:url"
+            content="https://siradel-oss.github.io/horizon-demo-coastline-erosion/"
+        />
+        <meta
+            property="og:image"
+            content="https://siradel-oss.github.io/horizon-demo-coastline-erosion/og-image.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+            property="og:image:alt"
+            content="Shoreline Explorer: coastal low-lying areas around La Rochelle in 3D, below the highest astronomical tide + 1 m"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
         <!-- Apply stored dark/light preference before paint (no flash). Default = dark. -->
         <script>
             try {
-                if (localStorage.getItem("dih-shoreline-explorer:dark") === "false")
+                if (
+                    localStorage.getItem(
+                        "horizon-demo-coastline-erosion:dark",
+                    ) === "false"
+                )
                     document.documentElement.classList.remove("dark");
             } catch (e) {}
         </script>

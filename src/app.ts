@@ -447,7 +447,7 @@ export class App {
 
     /** First-launch welcome popin visibility (persisted seen-state below). */
     private static readonly WELCOME_SEEN_KEY =
-        "dih-shoreline-explorer:welcome-seen";
+        "horizon-demo-coastline-erosion:welcome-seen";
     readonly welcomeOpen = signal(!localStorage.getItem(App.WELCOME_SEEN_KEY));
 
     protected readonly t = inject(I18n).t;

@@ -1,13 +1,13 @@
 {
-    "name": "dih-shoreline-explorer",
+    "name": "horizon-demo-coastline-erosion",
     "version": "0.1.0",
     "private": true,
     "description": "Experimental coastline retreat explorer for metropolitan France, built as a demonstrator of the Horizon 3D engine.",
     "repository": {
         "type": "git",
-        "url": "https://github.com/siradel-oss/dih-shoreline-explorer.git"
+        "url": "https://github.com/siradel-oss/horizon-demo-coastline-erosion.git"
     },
-    "homepage": "https://github.com/siradel-oss/dih-shoreline-explorer",
+    "homepage": "https://github.com/siradel-oss/horizon-demo-coastline-erosion",
     "type": "module",
     "scripts": {
         "dev": "vite",

@@ -9,7 +9,7 @@ import { I18n } from "../i18n";
 import { Button } from "./button";
 import { Icon } from "./icon";
 
-const DARK_KEY = "dih-shoreline-explorer:dark";
+const DARK_KEY = "horizon-demo-coastline-erosion:dark";
 
 function readStoredDark(): boolean {
     const stored = localStorage.getItem(DARK_KEY);

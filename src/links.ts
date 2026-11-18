@@ -3,7 +3,7 @@ export const LINKS = {
     horizon: "https://horizon.oss.siradel.com",
     sce: "https://sce.oss.siradel.com",
     siradel: "https://www.siradel.com",
-    repo: "https://github.com/siradel-oss/dih-shoreline-explorer",
+    repo: "https://github.com/siradel-oss/horizon-demo-coastline-erosion",
     contactEmail: "opensource@siradel.com",
     /** Cerema study (2024) this explorer is inspired by. */
     ceremaStudy:

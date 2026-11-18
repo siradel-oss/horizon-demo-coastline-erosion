@@ -19,7 +19,7 @@ export type Text = Record<Lang, string>;
 
 export const LANGS: readonly Lang[] = ["en", "fr"];
 
-const LANG_KEY = "dih-shoreline-explorer:lang";
+const LANG_KEY = "horizon-demo-coastline-erosion:lang";
 
 /** BCP 47 locale used for number and date formatting. */
 const LOCALES: Record<Lang, string> = { en: "en-GB", fr: "fr-FR" };
