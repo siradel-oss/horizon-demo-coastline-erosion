@@ -5,7 +5,7 @@ shores of metropolitan France, in English and French. See how the coastline has
 moved, where it could be in 2050 and 2100, and what lies in its path, on a 3D map
 in the browser.
 
-[![Shoreline Explorer: coastal low-lying areas around La Rochelle in 3D, below the highest astronomical tide + 1 m](.github/screenshot.webp)](https://siradel-oss.github.io/horizon-demo-coastline-erosion/)
+[![Shoreline Explorer: projected 2100 coastline retreat shown as 3D sectors, with the risk zones panel and the guided tour](.github/screenshot.webp)](https://siradel-oss.github.io/horizon-demo-coastline-erosion/)
 
 **[▶ Live demo](https://siradel-oss.github.io/horizon-demo-coastline-erosion/)**
 
