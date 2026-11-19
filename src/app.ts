@@ -45,6 +45,7 @@ import { CompareSlider } from "./layout/compare-slider";
 import { TourService } from "./tour.service";
 import { ScenarioStep } from "./scenarios";
 import { flyTo } from "./viewpoints";
+import { baseUrl } from "./layers/_shared";
 
 const VIEWER_OPTIONS: HrzProtocol.IViewerOptions = {
     showLoadingScreen: true,
@@ -496,9 +497,9 @@ export class App {
         afterNextRender(() => {
             HrzCoreBackend.init(
                 this.canvas().nativeElement,
-                // Root where hrz_core.{js,wasm} are served — base-relative so the
-                // engine resolves them under the deploy subpath (Vite `base`).
-                import.meta.env.BASE_URL,
+                // Root where hrz_core.{js,wasm} are served, as an absolute URL
+                // under the deploy base.
+                baseUrl(),
                 VIEWER_OPTIONS,
                 (backend, initStatus) => {
                     if (

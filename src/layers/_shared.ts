@@ -15,13 +15,18 @@ import { HrzProtocol } from "@siradel-oss/horizon-protocol";
 export const IGN_ATTRIBUTION = "IGN — Géoplateforme";
 
 /**
- * Resolves a static asset (vendored in resources/, served at the deploy base root)
- * against the app's deploy base (Vite `base`). Dev / root deploy: "/x".
- * Subpath deploy (`vite build --base=/demo/`): "/demo/x".
- * `BASE_URL` always ends with "/".
+ * Absolute URL of the app's deploy base (Vite `base`, "./" in builds),
+ * resolved against the page so it stays valid inside the engine workers.
+ * Always ends with "/".
  */
-export const assetUrl = (file: string): string =>
-    `${import.meta.env.BASE_URL}${file}`;
+export const baseUrl = (): string =>
+    new URL(import.meta.env.BASE_URL, document.baseURI).href;
+
+/**
+ * Resolves a static asset (vendored in resources/, served at the deploy base
+ * root) against the deploy base.
+ */
+export const assetUrl = (file: string): string => `${baseUrl()}${file}`;
 
 /** Resolves a local tiled-data file served under <base>/data/. */
 export const dataUrl = (file: string): string => assetUrl(`data/${file}`);

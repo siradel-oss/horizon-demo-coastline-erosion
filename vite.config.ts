@@ -98,6 +98,9 @@ function copyRuntimeFiles(): Plugin {
 }
 
 export default defineConfig({
+    // Relative asset URLs: the same build runs at a domain root or under a
+    // subpath (oss.siradel.com/<repository>/, private Pages domain…).
+    base: "./",
     plugins: [
         tailwindcss(),
         // Compiles real Angular components (latest), keeping the Vite toolchain

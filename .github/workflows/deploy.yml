@@ -29,12 +29,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # Base path assigned by Pages: "/<repository>" on a public project site,
-      # empty at the root of a private or custom-domain site.
-      - id: pages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
 
-      - run: pnpm build --base=${{ steps.pages.outputs.base_path }}/
+      # Relative asset URLs (Vite base "./"): the build works under any subpath.
+      - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
         with:
