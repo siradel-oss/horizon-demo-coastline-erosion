@@ -28,7 +28,7 @@ const BEARING_STEP = 0.26; // rad, relative delta (+ = toward the right)
                  aligns the altitude with the centre of the compass. -->
             <div class="flex flex-row items-center gap-3">
                 <!-- Control rose: compass in the centre, cardinal directions -->
-                <div class="relative w-32 h-32">
+                <div class="nav-rose relative w-32 h-32">
                     <button
                         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto rounded-full p-1.5 ui-surface cursor-pointer transition-colors"
                         [title]="
@@ -94,7 +94,7 @@ const BEARING_STEP = 0.26; // rad, relative delta (+ = toward the right)
 
                 <!-- Zoom group (+ / altitude / −), right of the compass -->
                 <div
-                    class="pointer-events-auto flex flex-col items-stretch ui-surface rounded-lg overflow-hidden"
+                    class="nav-zoom pointer-events-auto flex flex-col items-stretch ui-surface rounded-lg overflow-hidden"
                 >
                     <button
                         class="navBtn"

@@ -1,5 +1,6 @@
 import { HrzApi } from "@siradel-oss/horizon-api";
 import { HrzProtocol } from "@siradel-oss/horizon-protocol";
+import { px } from "../device";
 
 /**
  * Shared foundation for the layer sub-modules (src/layers/*).
@@ -110,7 +111,7 @@ export async function addPmtilesFlatOverlay(
                   sceneViews: { bits: 3 },
                   flatOverlayPolyline: {
                       color: opts.color,
-                      width: { defaultValue: opts.lineWidth ?? 3 },
+                      width: { defaultValue: px(opts.lineWidth ?? 3) },
                       // Pixels: otherwise the width is in meters -> invisible at country scale.
                       widthUnit: lineWidthUnit,
                       zIndex: opts.zIndex,
@@ -134,7 +135,7 @@ export async function addPmtilesFlatOverlay(
             sceneViews: { bits: 3 },
             flatOverlayPolyline: {
                 color: { defaultValue: opts.outline.color },
-                width: { defaultValue: opts.outline.width ?? 1.5 },
+                width: { defaultValue: px(opts.outline.width ?? 1.5) },
                 widthUnit: lineWidthUnit,
                 // Outline drawn inside the polygon -> does not bleed onto neighbors.
                 side: HrzProtocol.PolylineSide.SIDE_INSIDE,

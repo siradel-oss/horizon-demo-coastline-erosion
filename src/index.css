@@ -410,3 +410,119 @@ input[type="range"] {
     accent-color: var(--color-surface-primary);
     cursor: pointer;
 }
+
+/* ---------------------------------------------------------------------------
+ * Phone layout (below Tailwind's sm breakpoint). Unlayered, so these rules win
+ * over the utility classes of the desktop layout they adjust.
+ *   - the thematic rail becomes a tool bar along the bottom edge, with the map
+ *     credits in a thin strip under it;
+ *   - side panels become sheets above that bar;
+ *   - map controls keep the basemap toggles and a small compass (gestures
+ *     replace the rotate / tilt / zoom buttons);
+ *   - the tour card moves to the top, the panel it opens takes the bottom.
+ * ------------------------------------------------------------------------- */
+:root {
+    --credits-h: 1.5rem;
+    /* Everything under a sheet: tool bar, credits strip, home indicator. */
+    --toolbar-h: calc(3.5rem + var(--credits-h) + env(safe-area-inset-bottom));
+}
+
+body {
+    /* No pull-to-refresh or bounce: a vertical drag on the map moves the camera. */
+    overscroll-behavior: none;
+}
+
+@media (max-width: 639.98px) {
+    .app-title {
+        display: none;
+    }
+
+    .rail-area {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: calc(var(--credits-h) + env(safe-area-inset-bottom));
+        gap: 0;
+    }
+    .rail {
+        width: 100%;
+        height: 3.5rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        gap: 0;
+        padding: 0 0.25rem;
+        background-color: var(--ui-surface-bg);
+        border-top: 1px solid var(--color-border-default);
+    }
+    /* Sections dissolve into the bar: no own surface, no hover expansion. */
+    .rail-section,
+    .rail-section:hover {
+        width: auto;
+        flex-direction: row;
+        padding: 0;
+        background: none;
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .rail-section > :first-child,
+    .rail-label {
+        display: none;
+    }
+
+    .credits {
+        left: 0;
+        right: 0;
+        bottom: env(safe-area-inset-bottom);
+        height: var(--credits-h);
+        padding: 0 0.5rem;
+        background-color: var(--ui-surface-bg);
+    }
+
+    .win-left,
+    .win-right {
+        position: fixed;
+        top: auto;
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: calc(var(--toolbar-h) + 0.5rem);
+        width: auto;
+        max-height: 55dvh;
+        z-index: 40;
+    }
+
+    /* An open sheet covers the map controls: hide them rather than let
+       their top rows stick out above it. */
+    .rail-area:has(.win-left) ~ .map-controls {
+        display: none;
+    }
+    .map-controls,
+    .loading {
+        bottom: calc(var(--toolbar-h) + 0.5rem);
+    }
+    .map-controls {
+        right: 0.5rem;
+    }
+    .nav-rose {
+        width: auto;
+        height: auto;
+    }
+    .nav-rose > button:not(:first-child),
+    .nav-zoom {
+        display: none;
+    }
+    .nav-rose > button:first-child {
+        position: static;
+        translate: none; /* Tailwind 4 centres with the translate property */
+    }
+
+    .tour-card {
+        top: calc(4rem + env(safe-area-inset-top));
+        bottom: auto;
+    }
+    /* During the tour, the card and the panel it opens leave the map visible. */
+    .touring .win-left {
+        max-height: 30dvh;
+    }
+}

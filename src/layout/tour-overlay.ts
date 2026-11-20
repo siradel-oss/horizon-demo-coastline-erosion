@@ -18,7 +18,7 @@ import { TourService } from "../tour.service";
     template: `
         @if (tour.current(); as step) {
             <div
-                class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[400] w-[92vw] max-w-[40rem] p-5 rounded-xl ui-surface shadow-2xl text-text-body pointer-events-auto"
+                class="tour-card fixed bottom-8 left-1/2 -translate-x-1/2 z-[400] w-[92vw] max-w-[40rem] p-5 rounded-xl ui-surface shadow-2xl text-text-body pointer-events-auto"
                 role="dialog"
                 [attr.aria-label]="t({ en: 'Guided tour', fr: 'Tour guidé' })"
             >

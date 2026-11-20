@@ -46,6 +46,7 @@ import { TourService } from "./tour.service";
 import { ScenarioStep } from "./scenarios";
 import { flyTo } from "./viewpoints";
 import { baseUrl } from "./layers/_shared";
+import { fixPointerScale } from "./device";
 
 const VIEWER_OPTIONS: HrzProtocol.IViewerOptions = {
     showLoadingScreen: true,
@@ -137,7 +138,8 @@ type LeftPanel =
     ],
     template: `
         <div
-            class="w-screen h-screen relative bg-surface-page overflow-clip select-none"
+            class="w-screen h-dvh relative bg-surface-page overflow-clip select-none"
+            [class.touring]="tour.active()"
             (keydown)="onKeyDown($event)"
         >
             <div class="absolute inset-0">
@@ -167,7 +169,7 @@ type LeftPanel =
                     <app-sce-pin class="h-7" />
                 </a>
                 <div
-                    class="font-bold text-lg leading-none tracking-tight text-brand-strong"
+                    class="app-title font-bold text-lg leading-none tracking-tight text-brand-strong"
                 >
                     Shoreline<span class="text-brand-accent">Explorer</span>
                 </div>
@@ -206,12 +208,12 @@ type LeftPanel =
 
             <!-- Left, below the header: separate vertical thematic blocks. -->
             <div
-                class="absolute top-24 bottom-4 left-4 gap-4 flex flex-row items-start pointer-events-none"
+                class="rail-area absolute top-24 bottom-4 left-4 gap-4 flex flex-row items-start pointer-events-none"
             >
                 <!-- Fixed-width rail: expanded sections overlay to the right
                      (z-50) instead of reflowing the open windows. -->
                 <div
-                    class="flex flex-col gap-4 w-14 shrink-0 pointer-events-auto"
+                    class="rail flex flex-col gap-4 w-14 shrink-0 pointer-events-auto"
                 >
                     <!-- Exploration (navigation: search + notable sites per hazard) -->
                     <app-menu-section
@@ -390,7 +392,7 @@ type LeftPanel =
             </div>
 
             <div
-                class="absolute bottom-4 right-4 flex flex-col items-end gap-3 pointer-events-none"
+                class="map-controls absolute bottom-4 right-4 flex flex-col items-end gap-3 pointer-events-none"
             >
                 <app-basemap-controls />
                 <app-compass-overlay />
@@ -399,7 +401,7 @@ type LeftPanel =
 
             <!-- Bottom-left: Siradel credit + permanent map credit (opens the panel). -->
             <div
-                class="absolute bottom-1.5 left-4 z-40 flex flex-row items-center gap-2 pointer-events-none"
+                class="credits absolute bottom-1.5 left-4 z-40 flex flex-row items-center gap-2 pointer-events-none"
             >
                 <a
                     [href]="links.siradel"
@@ -430,7 +432,7 @@ type LeftPanel =
 
             @if (successiveIsNotWorking() < 5) {
                 <app-loading-indicator
-                    class="absolute bottom-4 left-1/2 -translate-x-1/2 transition-opacity"
+                    class="loading absolute bottom-4 left-1/2 -translate-x-1/2 transition-opacity"
                 />
             }
         </div>
@@ -507,6 +509,7 @@ export class App {
                             HrzProtocol.ViewerInitStatus.INIT_SUCCESS &&
                         backend
                     ) {
+                        fixPointerScale(this.canvas().nativeElement);
                         this.horizonService.setApi(
                             new HrzApi.AsyncApi(backend),
                         );

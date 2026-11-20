@@ -15,7 +15,7 @@ import { Icon } from "./icon";
     styles: [":host { display: contents; }"],
     template: `
         <div
-            class="group/rail z-50 ui-surface rounded-xl p-2 flex flex-col gap-1 overflow-hidden
+            class="rail-section group/rail z-50 ui-surface rounded-xl p-2 flex flex-col gap-1 overflow-hidden
                    w-14 hover:w-60 transition-[width] duration-200 ease-out"
         >
             <!-- Section title: grows in from 0 height on hover, no collapsed gap. -->
@@ -64,7 +64,7 @@ export class MenuSection {
                     ></span>
                 }
             </span>
-            <span class="whitespace-nowrap text-body-sm">{{ label() }}</span>
+            <span class="rail-label whitespace-nowrap text-body-sm">{{ label() }}</span>
         </button>
     `,
 })

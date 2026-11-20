@@ -38,10 +38,14 @@ export class PickService {
     async pickFromClick(event: MouseEvent, canvas: HTMLCanvasElement) {
         const api = this.api;
         if (!api) return;
+        // Horizon 26.1 applies the device pixel ratio twice to pick positions
+        // too (see fixPointerScale): hand it CSS pixels divided by the ratio,
+        // or a tap on a phone picks far below and right of the finger.
         const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
         const results = await this.pick(api, {
-            x: Math.round(event.clientX - rect.left),
-            y: Math.round(event.clientY - rect.top),
+            x: Math.round((event.clientX - rect.left) / dpr),
+            y: Math.round((event.clientY - rect.top) / dpr),
         });
         this.lastPick.set(results.results ?? []);
     }

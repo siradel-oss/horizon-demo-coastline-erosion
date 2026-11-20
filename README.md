@@ -20,6 +20,8 @@ in the browser.
 - Erosion hotspots, guided tour, side-by-side comparison of aerial imagery
 - 3D terrain and IGN imagery, address search, dark / light theme, English /
   French interface
+- Works on phones: tool bar along the bottom edge, panels as bottom sheets,
+  tap a coastline segment for its survey details
 
 ## Built with Horizon
 
