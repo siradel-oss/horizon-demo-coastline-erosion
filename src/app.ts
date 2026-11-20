@@ -46,7 +46,6 @@ import { TourService } from "./tour.service";
 import { ScenarioStep } from "./scenarios";
 import { flyTo } from "./viewpoints";
 import { baseUrl } from "./layers/_shared";
-import { fixPointerScale } from "./device";
 
 const VIEWER_OPTIONS: HrzProtocol.IViewerOptions = {
     showLoadingScreen: true,
@@ -509,7 +508,6 @@ export class App {
                             HrzProtocol.ViewerInitStatus.INIT_SUCCESS &&
                         backend
                     ) {
-                        fixPointerScale(this.canvas().nativeElement);
                         this.horizonService.setApi(
                             new HrzApi.AsyncApi(backend),
                         );
