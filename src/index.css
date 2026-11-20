@@ -503,13 +503,30 @@ body {
     }
     .map-controls {
         right: 0.5rem;
+        gap: 0.5rem;
     }
     .nav-rose {
         width: auto;
         height: auto;
     }
+    /* Zoom buttons stay (next to pinching); the rose arrows and the altitude go. */
     .nav-rose > button:not(:first-child),
-    .nav-zoom {
+    .nav-zoom .altCell,
+    .nav-zoom .altCell + div {
+        display: none;
+    }
+    /* Basemap modes stacked; dropdowns (photo date, relief source) reduced to
+       their icon, the menu opens on tap. */
+    .basemap-modes {
+        flex-direction: column;
+    }
+    .map-controls app-dropdown .trigger {
+        width: 2.5rem;
+        justify-content: center;
+        padding: 0;
+    }
+    .map-controls app-dropdown .label,
+    .map-controls app-dropdown .chevron {
         display: none;
     }
     .nav-rose > button:first-child {

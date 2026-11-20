@@ -47,7 +47,7 @@ const RGE_ALTI_INDEX = 1; // index of the high-res RGE ALTI® source in TERRAINS
                  view); in single view, the date selector shows below. -->
             <div class="flex flex-col items-end gap-2">
                 <div
-                    class="ui-surface flex flex-row gap-1 p-1 rounded-lg pointer-events-auto"
+                    class="basemap-modes ui-surface flex flex-row gap-1 p-1 rounded-lg pointer-events-auto"
                 >
                     <button
                         class="iconToggle"
